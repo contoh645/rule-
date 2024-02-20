@@ -3,35 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery</title>
+<title>恋爱RPG游戏</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
+        background-color: #f0f0f0;
+        text-align: center;
     }
-    .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 10px;
-        padding: 10px;
+    #story {
+        margin-top: 50px;
     }
-    .gallery img {
-        width: 100%;
-        height: auto;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    #choices {
+        margin-top: 20px;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
     }
 </style>
 </head>
 <body>
 
-<div class="gallery">
-    <img src="src/233.jpg.jpg" alt="Image 1">
-    <img src="src/kksk.jpeg" alt="Image 2">
-    <img src="src/ue.jpg" alt="Image 3">
-    
+<div id="story">
+    <p>你是一个普通的高中生，最近在学校里有几个人引起了你的注意。</p>
 </div>
+
+<div id="choices">
+    <button onclick="chooseCharacter('alice')">追求爱丽丝</button>
+    <button onclick="chooseCharacter('bob')">追求鲍勃</button>
+    <button onclick="chooseCharacter('charlie')">追求查理</button>
+    <button onclick="ignoreAll()">不追求任何人</button>
+</div>
+
+<script>
+    function chooseCharacter(character) {
+        switch(character) {
+            case 'alice':
+                document.getElementById('story').innerHTML = "<p>你选择追求爱丽丝，但她已经有了男朋友。</p>";
+                break;
+            case 'bob':
+                document.getElementById('story').innerHTML = "<p>你选择追求鲍勃，他对你表现出了好感。</p>";
+                break;
+            case 'charlie':
+                document.getElementById('story').innerHTML = "<p>你选择追求查理，但他对你毫无兴趣。</p>";
+                break;
+        }
+        document.getElementById('choices').innerHTML = "<button onclick='continueGame()'>继续游戏</button>";
+    }
+
+    function ignoreAll() {
+        document.getElementById('story').innerHTML = "<p>你选择不追求任何人，继续专注学业。</p>";
+        document.getElementById('choices').innerHTML = "<button onclick='restartGame()'>重新开始游戏</button>";
+    }
+
+    function continueGame() {
+        document.getElementById('story').innerHTML = "<p>你和你的对象开始度过愉快的时光，但不久后发现他有些不为人知的秘密。</p>";
+        document.getElementById('choices').innerHTML = "<button onclick='endGame()'>结束游戏</button>";
+    }
+
+    function restartGame() {
+        document.getElementById('story').innerHTML = "<p>重新开始游戏...</p>";
+        document.getElementById('choices').innerHTML = "<button onclick='startGame()'>开始游戏</button>";
+    }
+
+    function endGame() {
+        document.getElementById('story').innerHTML = "<p>游戏结束，谢谢你的参与！</p>";
+        document.getElementById('choices').innerHTML = "";
+    }
+
+    function startGame() {
+        document.getElementById('story').innerHTML = "<p>你是一个普通的高中生，最近在学校里有几个人引起了你的注意。</p>";
+        document.getElementById('choices').innerHTML = "<button onclick='chooseCharacter('alice')'>追求爱丽丝</button><button onclick='chooseCharacter('bob')'>追求鲍勃</button><button onclick='chooseCharacter('charlie')'>追求查理</button><button onclick='ignoreAll()'>不追求任何人</button>";
+    }
+
+    startGame();
+</script>
 
 </body>
 </html>
+
